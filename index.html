@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Angga Ferdani</title>
+<meta name="description" content="Angga Ferdani — Full Stack Web Developer" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Inter', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'] },
+        colors: { ink: '#0a0a0a', paper: '#e7e7e7', muted: '#8a8a8a' },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background: #000; color: #e7e7e7; -webkit-font-smoothing: antialiased; }
+  ::selection { background: #e7e7e7; color: #000; }
+
+  /* Are.na style list markers */
+  .list-alpha { list-style: lower-alpha; }
+  .list-num { list-style: decimal; }
+  .list-alpha > li::marker,
+  .list-num > li::marker { color: #8a8a8a; }
+
+  .rule { border-top: 1px solid #262626; }
+
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .plus-v { transform: rotate(90deg); opacity: 0; }
+
+  /* Contribution graph: kolom 11px + scroll horizontal di layar kecil,
+     melebar penuh mengikuti container mulai breakpoint sm (640px) */
+  #gh-months, #gh-grid { grid-auto-flow: column; grid-auto-columns: 11px; gap: 2px; }
+  #gh-grid { grid-template-rows: repeat(7, auto); }
+  #gh-grid > span { width: 11px; }
+  @media (min-width: 640px) {
+    #gh-months, #gh-grid { grid-auto-columns: 1fr; }
+    #gh-grid > span { width: 100%; }
+  }
+
+  /* Selector-nya class saja, bukan a.link, supaya elemen non-anchor bisa ikut memakainya */
+  .link { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: #4a4a4a; }
+  .link:hover { text-decoration-color: #e7e7e7; }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+  <!-- Page container: content is centered -->
+  <div class="mx-auto w-full max-w-[1500px] px-6 sm:px-10">
+    <div class="mx-auto w-full max-w-[700px]">
+
+      <!-- ══════════════════ ABOUT ══════════════════ -->
+      <section id="about" class="pt-16 sm:pt-24 lg:pt-28">
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight">@anggaferdani</h1>
+        <p class="mt-6 max-w-[62ch] text-lg sm:text-xl leading-relaxed">
+          Saya <strong class="font-bold">Angga Ferdani</strong>, Full Stack Web Developer dengan pengalaman
+          mengembangkan aplikasi web secara end-to-end, mulai dari frontend, backend, database, hingga deployment.
+          Memiliki ketertarikan terhadap teknologi dan pengembangan produk digital, serta selalu berusaha meningkatkan
+          kemampuan dengan mempelajari teknologi dan pendekatan baru.
+        </p>
+
+        <!-- GitHub contribution graph — digambar dari data live, lihat script di bawah -->
+        <div id="gh" class="mt-8 hidden" data-user="anggaferdani">
+          <!-- Pilihan tahun — diisi dari data (satu tombol per tahun yang punya kontribusi) -->
+          <div id="gh-years" class="mb-3 flex flex-wrap gap-1"></div>
+
+          <!-- Layar kecil: scroll horizontal seperti GitHub. sm ke atas: melebar penuh, tanpa scroll -->
+          <div class="overflow-x-auto pb-1 sm:overflow-x-visible">
+            <div class="flex w-max gap-[6px] sm:w-full">
+              <!-- Label hari: Mon / Wed / Fri sejajar barisnya -->
+              <div class="flex shrink-0 flex-col pt-[18px] text-[10px] leading-none text-muted">
+                <div class="grid flex-1" style="grid-template-rows: repeat(7, 1fr); gap: 2px;">
+                  <span></span><span>Mon</span><span></span>
+                  <span>Wed</span><span></span>
+                  <span>Fri</span><span></span>
+                </div>
+              </div>
+
+              <div class="shrink-0 sm:min-w-0 sm:flex-1">
+                <div id="gh-months" class="grid h-[18px] text-[10px] text-muted"></div>
+                <div id="gh-grid" class="grid"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-2 flex items-center gap-2 text-[11px] text-muted">
+            <span id="gh-total"></span>
+            <span class="ml-auto">Less</span>
+            <span class="h-[11px] w-[11px] rounded-[2px]" style="background:#161b22"></span>
+            <span class="h-[11px] w-[11px] rounded-[2px]" style="background:#0e4429"></span>
+            <span class="h-[11px] w-[11px] rounded-[2px]" style="background:#006d32"></span>
+            <span class="h-[11px] w-[11px] rounded-[2px]" style="background:#26a641"></span>
+            <span class="h-[11px] w-[11px] rounded-[2px]" style="background:#39d353"></span>
+            <span>More</span>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <ul id="contact" class="mt-8 max-w-[52ch] space-y-1 text-lg sm:text-xl leading-relaxed">
+          <li><a class="link" href="https://wa.me/6281290573256" target="_blank" rel="noopener">+62 81290573256</a></li>
+          <li><a class="link" href="mailto:ferdaniang@gmail.com">ferdaniang@gmail.com</a></li>
+          <li><a class="link" href="https://linkedin.com/in/anggaferdani" target="_blank" rel="noopener">linkedin.com/in/anggaferdani</a></li>
+          <li><a class="link" href="https://github.com/anggaferdani" target="_blank" rel="noopener">github.com/anggaferdani</a></li>
+        </ul>
+      </section>
+
+      <!-- ══════════════════ WORK EXPERIENCE ══════════════════ -->
+      <section id="experience" class="pt-20 sm:pt-28">
+        <h2 class="text-xl sm:text-2xl font-bold tracking-tight">Work Experience</h2>
+
+        <h3 class="mt-8 text-lg sm:text-xl font-bold">Spero Mahakarya Nusantara</h3>
+
+        <ol class="list-num mt-6 ml-6 space-y-8">
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">Web Developer — Internship</p>
+            <p class="mt-1 text-base sm:text-lg text-muted">Sep 2022 – Mar 2023</p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Terlibat dalam pengembangan aplikasi web, mencakup frontend, backend, deployment, serta perbaikan bug dan
+              maintenance aplikasi.
+            </p>
+          </li>
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">Full Stack Web Developer — Full Time</p>
+            <p class="mt-1 text-base sm:text-lg text-muted">Mar 2023 – Present</p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan berbagai aplikasi web dan sistem digital secara end-to-end, mencakup frontend, backend,
+              database, deployment, serta integrasi API, layanan pihak ketiga, dan perangkat IoT.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ══════════════════ PROJECTS ══════════════════ -->
+      <section id="projects" class="pt-20 sm:pt-28">
+        <h2 class="text-xl sm:text-2xl font-bold tracking-tight">Projects</h2>
+
+        <ol class="list-num mt-8 ml-6 space-y-14">
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Empat Pilar MPR RI Competition System
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan sistem kompetisi berbasis web untuk Empat Pilar MPR RI dengan komunikasi real-time,
+              integrasi perangkat IoT, mode offline, serta sinkronisasi tombol buzzer dan skor.
+            </p>
+
+            <!-- Gallery: gambar tampil utuh, tanpa crop — tingginya mengikuti rasio asli masing-masing.
+                 items-start supaya grid tidak merentang gambar agar setinggi barisnya.
+                 File yang tidak ada di assets/projects/ dihapus dari DOM saat load. -->
+            <div class="mt-5 grid grid-cols-3 items-start gap-3">
+              <img class="js-shot w-full border border-white" src="assets/projects/empatpilarmpr0001.jpg" loading="lazy"
+                   alt="Quiz Management System — layar kompetisi" />
+              <img class="js-shot w-full border border-white" src="assets/projects/empatpilarmpr0002.jpg" loading="lazy"
+                   alt="Quiz Management System — panel buzzer" />
+              <img class="js-shot w-full border border-white" src="assets/projects/empatpilarmpr0003.JPG" loading="lazy"
+                   alt="Quiz Management System — manajemen soal" />
+              <img class="js-shot w-full border border-white" src="assets/projects/empatpilarmpr0004.jpg" loading="lazy"
+                   alt="Quiz Management System — papan skor" />
+              <img class="js-shot w-full border border-white" src="assets/projects/empatpilarmpr0005.jpg" loading="lazy"
+                   alt="Quiz Management System — perangkat IoT" />
+              <img class="js-shot w-full border border-white" src="assets/projects/empatpilarmpr0006.jpg" loading="lazy"
+                   alt="Quiz Management System — perangkat IoT" />
+            </div>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              <a class="link" href="https://github.com/anggaferdani/git-manager" target="_blank" rel="noopener">Git Manager</a>
+              <!-- aria-hidden: judulnya sendiri sudah berupa anchor, jadi ikon ini murni penanda visual -->
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   aria-hidden="true">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan tool untuk mengelola dan berganti akun Git pada satu komputer, sehingga pengguna dapat
+              melakukan commit dan push menggunakan konfigurasi akun yang berbeda.
+            </p>
+
+            <div class="mt-5 grid grid-cols-1 items-start gap-3">
+              <img class="js-shot w-full border border-white" src="assets/projects/gitmanager.png" loading="lazy"
+                   alt="Git Manager — dashboard daftar akun Git dengan tombol Set Active, Edit, dan Delete" />
+            </div>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Persona UMKM
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan platform berbasis AI yang membantu UMKM mengidentifikasi identitas merek serta
+              mengembangkan produk melalui pembuatan konten, tag, dan deskripsi yang mengikuti tren secara otomatis.
+            </p>
+
+            <div class="mt-5 grid grid-cols-1 items-start gap-3">
+              <img class="js-shot w-full border border-white" src="assets/projects/personaumkm.jpg" loading="lazy"
+                   alt="Persona UMKM — halaman AI Generate Content" />
+            </div>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Onelito Koi
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan website e-commerce ikan koi dengan integrasi payment gateway, WhatsApp API, dan layanan pengiriman. Sistem mendukung pembelian ikan dan pakan, online auction, event lottery, serta pembaruan data secara real-time.
+            </p>
+
+            <div class="mt-5 grid grid-cols-1 items-start gap-3">
+              <img class="js-shot w-full border border-white" src="assets/projects/onelitokoi.png" loading="lazy"
+                   alt="Onelito Koi — halaman utama toko" />
+            </div>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              <a class="link" href="https://github.com/anggaferdani/onelito-koi-live-auction" target="_blank" rel="noopener">Onelito Koi Live Auction</a>
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   aria-hidden="true">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan sistem live auction ikan koi berbasis offline untuk mendukung proses lelang dan sinkronisasi data secara real-time.
+            </p>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              PAR Call Center
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan sistem call center PT Prima Armada Raya dalam mengelola
+              laporan, keluhan, dan permintaan layanan pelanggan.
+            </p>
+
+            <div class="mt-5 grid grid-cols-2 items-start gap-3">
+              <img class="js-shot w-full border border-white" src="assets/projects/callcenterpar0001.jpg" loading="lazy"
+                   alt="PAR Call Center — dokumentasi saat pengembangan" />
+              <img class="js-shot w-full border border-white" src="assets/projects/callcenterpar0002.jpg" loading="lazy"
+                   alt="PAR Call Center — ruang kerja tim call center PT Prima Armada Raya" />
+            </div>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Smart Attendance
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan sistem absensi berbasis lokasi PT Guna Cipta Kreasi yang memastikan karyawan hanya
+              dapat melakukan absensi dalam radius lokasi yang telah ditentukan.
+            </p>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Holomoc Indonesia Company Profile
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan website company profile PT Holomoc Indonesia dengan optimasi SEO.
+            </p>
+
+            <div class="mt-5 grid grid-cols-1 items-start gap-3">
+              <img class="js-shot w-full border border-white" src="assets/projects/holomoc.png" loading="lazy"
+                   alt="Holomoc Indonesia — halaman utama dengan judul Immersive Media Integrator" />
+            </div>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Hangout Project
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan platform website MIXNETWORK yang menyediakan informasi terbaru mengenai tempat hangout
+              populer, seperti kafe, ruang publik, serta berbagai event menarik.
+            </p>
+
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Saranawisesa Properindo Company Profile &amp; E-Procurement
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan website company profile dan e-procurement PT Saranawisesa Properindo dalam mendukung
+              informasi perusahaan, layanan, proyek properti, serta proses pengadaan.
+            </p>
+
+            <div class="mt-5 grid grid-cols-1 items-start gap-3">
+              <img class="js-shot w-full border border-white" src="assets/projects/saranawisesa.jpg" loading="lazy"
+                   alt="Saranawisesa Properindo — halaman utama dengan tagline Passion Perform Pride" />
+            </div>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Bank BTN Registration System
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan sistem registrasi untuk event anniversary Bank BTN dengan fitur QR Code untuk proses
+              registrasi dan verifikasi kehadiran peserta.
+            </p>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Battle Management System
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan sistem manajemen pertempuran berbasis web dengan dashboard untuk monitoring dan kontrol
+              secara real-time, serta peta interaktif untuk penandaan posisi dan pelacakan personel.
+            </p>
+
+            <div class="mt-5 grid grid-cols-1 items-start gap-3">
+              <img class="js-shot w-full border border-white" src="assets/projects/bms.jpg" loading="lazy"
+                   alt="Battle Management System — dashboard dengan peta interaktif wilayah Indonesia dan perkakas penandaan posisi" />
+            </div>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Motion H2
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan dashboard monitoring distribusi PT Astra Honda Motor untuk memantau dan mengelola data
+              distribusi secara terpusat.
+            </p>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Reporting System
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan sistem reporting untuk PT Mega Sarana Satelit dalam mengelola data laporan secara
+              terstruktur.
+            </p>
+
+            <div class="mt-5 grid grid-cols-1 items-start gap-3">
+              <img class="js-shot w-full border border-white" src="assets/projects/mss.jpg" loading="lazy"
+                   alt="Reporting System — dokumentasi tim saat pengembangan di ruang rapat" />
+            </div>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Sarana Teknologi Komunikasi Company Profile
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan website company profile PT Sarana Teknologi Komunikasi untuk menampilkan informasi
+              perusahaan dan layanan yang ditawarkan.
+            </p>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              UMKM Level Up Landing Page
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan landing page program UMKM Level Up KOMINFO sebagai media informasi dan promosi program.
+            </p>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              School Facilities Management System
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan sistem manajemen fasilitas sekolah untuk mengelola data, pemeliharaan, dan penggunaan
+              fasilitas secara terpusat.
+            </p>
+
+            <div class="mt-5 grid grid-cols-1 items-start gap-3">
+              <img class="js-shot w-full border border-white" src="assets/projects/schoolfacilitiesmanagementsystem.jpg" loading="lazy"
+                   alt="School Facilities Management System — dokumentasi tim saat pengembangan" />
+            </div>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Silatnas 2022 Registration System
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan sistem registrasi peserta untuk event Silatnas 2022 Asosiasi Rental Indonesia dengan
+              fitur pendaftaran dan verifikasi kehadiran.
+            </p>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              UMKM Monitoring Dashboard
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan dashboard untuk Dinas Perdagangan Kota Surakarta dalam memantau dan mengelola data UMKM
+              secara terpusat.
+            </p>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Sismamedikal Learning Management System
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan platform learning management untuk PT Sismadi Mancorpindo yang mendukung pengelolaan
+              materi, pembelajaran, kelas, dan peserta.
+            </p>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Pelajar Digital Learning Management System
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan platform learning management PT Holomoc Indonesia yang mendukung pengelolaan materi,
+              pembelajaran, kelas, dan peserta.
+            </p>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Indo Defence 2022 Expo &amp; Forum Registration System
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan sistem registrasi peserta untuk event Indo Defence 2022 Expo &amp; Forum dengan fitur
+              pendaftaran dan pengecekan kehadiran.
+            </p>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Niaga Inti Kokoh Company Profile
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan website company profile PT Niaga Inti Kokoh untuk menampilkan informasi perusahaan,
+              layanan, dan produk yang ditawarkan.
+            </p>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Spero ERP &amp; Smart Attendance
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mengembangkan sistem ERP dan smart attendance PT Spero Mahakarya Nusantara yang saling terintegrasi
+              untuk mendukung pengelolaan operasional dan absensi karyawan.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <div class="h-24 sm:h-28"></div>
+
+    </div>
+  </div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ── GitHub contribution graph ──
+  // Data diambil dari API publik (tanpa token). Kalau gagal, blok ini disembunyikan
+  // agar halaman tidak menampilkan kotak kosong.
+  (function githubGraph() {
+    var root = document.getElementById('gh');
+    if (!root) return;
+
+    var user = root.getAttribute('data-user');
+    var LEVELS = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
+    var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    var grid = document.getElementById('gh-grid');
+    var months = document.getElementById('gh-months');
+    var yearsBar = document.getElementById('gh-years');
+    var totalEl = document.getElementById('gh-total');
+
+    var BTN_BASE = 'px-2 py-1 text-[11px] transition';
+    var BTN_ON = BTN_BASE + ' bg-[#1a1a1a] text-paper ring-1 ring-[#2f2f2f]';
+    var BTN_OFF = BTN_BASE + ' text-muted hover:text-paper';
+
+    // Hari ini dalam waktu lokal — dipakai untuk mengosongkan tanggal yang belum lewat
+    var now = new Date();
+    var today =
+      now.getFullYear() + '-' +
+      String(now.getMonth() + 1).padStart(2, '0') + '-' +
+      String(now.getDate()).padStart(2, '0');
+
+    var byYear = {}; // '2025' -> [{date, count, level}, ...] urut naik
+
+    function draw(year) {
+      var days = byYear[year] || [];
+      if (!days.length) return;
+
+      grid.textContent = '';
+      months.textContent = '';
+
+      var frag = document.createDocumentFragment();
+
+      // Sel kosong di awal supaya baris pertama selalu jatuh di hari Minggu
+      var firstDay = new Date(days[0].date + 'T00:00:00').getDay();
+      for (var i = 0; i < firstDay; i++) {
+        var pad = document.createElement('span');
+        pad.className = 'block aspect-square w-full';
+        frag.appendChild(pad);
+      }
+
+      days.forEach(function (d) {
+        var cell = document.createElement('span');
+        cell.className = 'block aspect-square w-full rounded-[2px]';
+        cell.style.background = LEVELS[d.level] || LEVELS[0];
+        // Tanggal yang belum lewat tetap digambar sebagai kotak kosong, tanpa tooltip
+        if (d.date <= today) {
+          cell.title = d.count + ' contribution' + (d.count === 1 ? '' : 's') + ' on ' + d.date;
+        }
+        frag.appendChild(cell);
+      });
+      grid.appendChild(frag);
+
+      // Label bulan: satu kolom per minggu, diberi teks saat bulannya berganti
+      var weeks = Math.ceil((firstDay + days.length) / 7);
+      var seen = -1;
+      for (var w = 0; w < weeks; w++) {
+        var ref = days[Math.max(w * 7 - firstDay, 0)];
+        var m = new Date(ref.date + 'T00:00:00').getMonth();
+        var label = document.createElement('span');
+        if (m !== seen && w < weeks - 1) {
+          label.textContent = MONTHS[m];
+          seen = m;
+        }
+        months.appendChild(label);
+      }
+
+      var total = days.reduce(function (sum, d) {
+        return sum + (d.date > today ? 0 : d.count);
+      }, 0);
+      totalEl.textContent = total.toLocaleString('en-US') + ' contributions in ' + year;
+
+      Array.prototype.forEach.call(yearsBar.children, function (btn) {
+        var on = btn.getAttribute('data-year') === year;
+        btn.className = on ? BTN_ON : BTN_OFF;
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+    }
+
+    // Satu request untuk semua tahun; ganti tahun setelahnya tidak perlu fetch lagi
+    fetch('https://github-contributions-api.jogruber.de/v4/' + user + '?y=all')
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        var all = data.contributions || [];
+        if (!all.length) throw new Error('no data');
+
+        all.forEach(function (d) {
+          var y = d.date.slice(0, 4);
+          (byYear[y] = byYear[y] || []).push(d);
+        });
+
+        var years = Object.keys(byYear).sort().reverse();
+        years.forEach(function (y) {
+          byYear[y].sort(function (a, b) {
+            return a.date < b.date ? -1 : 1;
+          });
+
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = y;
+          btn.className = BTN_OFF;
+          btn.setAttribute('data-year', y);
+          btn.addEventListener('click', function () {
+            draw(y);
+          });
+          yearsBar.appendChild(btn);
+        });
+
+        draw(years[0]);
+        root.classList.remove('hidden');
+      })
+      .catch(function () {
+        /* offline atau API sedang down — biarkan tersembunyi */
+      });
+  })();
+
+  // ── Gambar project yang filenya belum ada di disk dibuang dari DOM ──
+  // '.js-shot' sekarang menempel langsung di <img>, bukan di tombol pembungkus.
+  Array.prototype.forEach.call(document.querySelectorAll('.js-shot'), function (img) {
+    img.addEventListener('error', function () { img.remove(); });
+    if (img.complete && img.naturalWidth === 0) img.remove();
+  });
+})();
+</script>
+</body>
+</html>
