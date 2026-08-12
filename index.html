@@ -9,6 +9,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
 <script src="https://cdn.tailwindcss.com"></script>
+<!-- three.js di-vendor ke assets/vendor/ supaya preview 3D tetap jalan tanpa internet.
+     Importmap ini harus berada sebelum module script mana pun yang memakai specifier di bawah. -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "./assets/vendor/three/three.module.min.js",
+    "three/addons/": "./assets/vendor/three/jsm/"
+  }
+}
+</script>
 <script>
   tailwind.config = {
     theme: {
@@ -222,12 +232,15 @@
 
           <li class="pl-2">
             <p class="text-lg sm:text-xl font-bold leading-snug">
-              Onelito Koi
+              <a class="link" href="https://onelitokoi.id/" target="_blank" rel="noopener">Onelito Koi</a>
+              <!-- Ikon globe: r=9, bukan 10, supaya goresan setebal 2,5 tidak terpotong tepi viewBox.
+                   aria-hidden karena judulnya sendiri sudah berupa anchor. -->
               <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                   role="img" aria-label="Project tertutup">
-                <rect x="4" y="10.5" width="16" height="10" rx="2" />
-                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+                   aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18" />
+                <path d="M12 3a13.5 13.5 0 0 1 3.6 9 13.5 13.5 0 0 1-3.6 9 13.5 13.5 0 0 1-3.6-9A13.5 13.5 0 0 1 12 3z" />
               </svg>
             </p>
             <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
@@ -296,12 +309,13 @@
 
           <li class="pl-2">
             <p class="text-lg sm:text-xl font-bold leading-snug">
-              Holomoc Indonesia Company Profile
+              <a class="link" href="https://holomoc.com/" target="_blank" rel="noopener">Holomoc Indonesia Company Profile</a>
               <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                   role="img" aria-label="Project tertutup">
-                <rect x="4" y="10.5" width="16" height="10" rx="2" />
-                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+                   aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18" />
+                <path d="M12 3a13.5 13.5 0 0 1 3.6 9 13.5 13.5 0 0 1-3.6 9 13.5 13.5 0 0 1-3.6-9A13.5 13.5 0 0 1 12 3z" />
               </svg>
             </p>
             <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
@@ -589,6 +603,116 @@
               untuk mendukung pengelolaan operasional dan absensi karyawan.
             </p>
           </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Roblox Motion Tracking
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Menerapkan gerakan dari video ke karakter Roblox menggunakan motion tracking dan rigging, sehingga
+              gerakan karakter dapat mengikuti gerakan yang terdapat pada video.
+            </p>
+
+            <!-- preload="metadata": hanya durasi/dimensi yang diambil saat load, bukan 4 MB videonya -->
+            <div class="mt-5 grid grid-cols-1 items-start gap-3">
+              <!-- Border dipasang di pembungkus, bukan di elemen video: tingginya ikut rasio
+                   sumbernya dan sering jatuh di pecahan piksel, sehingga border 1px di sisi
+                   bawah bisa hilang saat dibulatkan browser. -->
+              <div class="shot-frame border border-white">
+                <video class="js-shot block w-full" src="assets/projects/roblox-motion-tracking.mp4"
+                       controls muted loop playsinline preload="metadata"></video>
+              </div>
+            </div>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              <a class="link" href="https://github.com/anggaferdani/aquarium" target="_blank" rel="noopener">Web-Based 3D Aquarium Simulation</a>
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   aria-hidden="true">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Membuat simulasi aquarium 3D berbasis web dengan model ikan beranimasi, dekorasi lingkungan, serta
+              konfigurasi untuk mengatur material dan statistik pada aquarium.
+            </p>
+
+            <div class="mt-5 grid grid-cols-1 items-start gap-3">
+              <!-- Border dipasang di pembungkus, bukan di elemen video: tingginya ikut rasio
+                   sumbernya dan sering jatuh di pecahan piksel, sehingga border 1px di sisi
+                   bawah bisa hilang saat dibulatkan browser. -->
+              <div class="shot-frame border border-white">
+                <video class="js-shot block w-full" src="assets/projects/aquarium.mp4"
+                       controls muted loop playsinline preload="metadata"></video>
+              </div>
+            </div>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              Roblox Terrain Generation
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   role="img" aria-label="Project tertutup">
+                <rect x="4" y="10.5" width="16" height="10" rx="2" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Melakukan eksperimen procedural terrain generation di Roblox untuk membuat terrain secara otomatis
+              dengan bentuk dan lingkungan yang dapat disesuaikan.
+            </p>
+
+            <div class="mt-5 grid grid-cols-1 items-start gap-3">
+              <!-- Border dipasang di pembungkus, bukan di elemen video: tingginya ikut rasio
+                   sumbernya dan sering jatuh di pecahan piksel, sehingga border 1px di sisi
+                   bawah bisa hilang saat dibulatkan browser. -->
+              <div class="shot-frame border border-white">
+                <video class="js-shot block w-full" src="assets/projects/roblox-terrain-generation.mp4"
+                       controls muted loop playsinline preload="metadata"></video>
+              </div>
+            </div>
+          </li>
+
+          <li class="pl-2">
+            <p class="text-lg sm:text-xl font-bold leading-snug">
+              <!-- Atribut download memaksa browser mengunduh, bukan menavigasi ke file.
+                   aria-label diawali teks yang terlihat, lalu menambahkan info unduhan yang
+                   tidak tersampaikan oleh atribut download itu sendiri. -->
+              <a class="link" href="assets/projects/skull.glb" download
+                 aria-label="3D Skull — unduh file .glb, 6 MB">3D Skull</a>
+              <svg viewBox="0 0 24 24" class="ml-1 inline-block h-6 w-6 align-middle text-white" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <path d="M7 10l5 5 5-5" />
+                <path d="M12 15V3" />
+              </svg>
+            </p>
+            <p class="mt-2 max-w-[58ch] text-lg sm:text-xl leading-relaxed">
+              Mencoba membuat objek tengkorak 3D dengan mengeksplorasi bentuk detail dan struktur dari model yang
+              dibuat.
+            </p>
+
+            <!-- Preview 3D: berputar sendiri, bisa diputar dengan seret, tanpa zoom.
+                 Tidak ada listener 'wheel' sehingga scroll halaman tidak pernah direbut —
+                 karena itu pula tidak perlu overlay instruksi. Canvas disisipkan skrip di bawah. -->
+            <div class="mt-5 grid grid-cols-1 items-start gap-3">
+              <div class="shot-frame border border-white">
+                <div id="skull-3d" class="aspect-[4/3] w-full" role="img"
+                     aria-label="Model 3D tengkorak, berputar otomatis dan bisa diputar dengan seret"></div>
+              </div>
+            </div>
+          </li>
         </ol>
       </section>
 
@@ -725,12 +849,171 @@
       });
   })();
 
-  // ── Gambar project yang filenya belum ada di disk dibuang dari DOM ──
-  // '.js-shot' sekarang menempel langsung di <img>, bukan di tombol pembungkus.
-  Array.prototype.forEach.call(document.querySelectorAll('.js-shot'), function (img) {
-    img.addEventListener('error', function () { img.remove(); });
-    if (img.complete && img.naturalWidth === 0) img.remove();
+  // ── Media project yang filenya belum ada di disk dibuang dari DOM ──
+  // '.js-shot' menempel langsung di elemen img/video, bukan di elemen pembungkus.
+  // Cek .complete hanya berlaku untuk img; elemen video tidak punya properti itu,
+  // jadi untuk video pengguguran mengandalkan event 'error' saja.
+  function dropShot(el) {
+    // Video dibungkus .shot-frame (pembawa border) — buang pembungkusnya sekalian
+    // supaya tidak menyisakan kotak berbingkai yang kosong.
+    var frame = el.closest('.shot-frame');
+    (frame || el).remove();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.js-shot'), function (el) {
+    el.addEventListener('error', function () { dropShot(el); });
+    if (el.complete && el.naturalWidth === 0) dropShot(el);
   });
+})();
+</script>
+
+<!-- ── Preview 3D (three.js, di-vendor lokal) ──────────────────────────────────
+     Sengaja tanpa OrbitControls: begitu kontrol dipasang, three.js menangkap event
+     wheel di atas canvas dan halaman berhenti bisa di-scroll saat kursor lewat situ.
+     Tanpa kontrol, canvas-nya inert — model cuma berputar sendiri.
+     Modul dimuat lewat importmap di <head>; tidak ada permintaan ke jaringan luar. -->
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+(function skullPreview() {
+  'use strict';
+
+  var host = document.getElementById('skull-3d');
+  if (!host) return;
+
+  function drop(reason) {
+    console.error('Preview 3D gagal:', reason);
+    var frame = host.closest('.shot-frame');
+    (frame || host).remove();
+  }
+
+  var renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  } catch (e) {
+    drop(e); // WebGL tidak tersedia
+    return;
+  }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.domElement.style.display = 'block';
+  renderer.domElement.style.width = '100%';
+  renderer.domElement.style.height = '100%';
+  renderer.domElement.style.cursor = 'grab';
+  // pan-y: usapan vertikal tetap men-scroll halaman di ponsel, usapan mendatar memutar model
+  renderer.domElement.style.touchAction = 'pan-y';
+  host.appendChild(renderer.domElement);
+
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  // Dua grup bersarang, bukan satu: tilt memiringkan, pivot memutar di dalamnya.
+  // Kalau pitch dan yaw ditaruh di objek yang sama, sumbu putar otomatis ikut miring
+  // dan model tampak bergoyang begitu dimiringkan.
+  var tilt = new THREE.Group();
+  var pivot = new THREE.Group();
+  tilt.add(pivot);
+  scene.add(tilt);
+
+  // Model tidak membawa tekstur — hanya material abu-abu default — jadi pencahayaan
+  // dari tiga arah yang membuat bentuknya terbaca.
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x1a1a1a, 2.2));
+  var key = new THREE.DirectionalLight(0xffffff, 2.4);
+  key.position.set(2, 3, 4);
+  scene.add(key);
+  var rim = new THREE.DirectionalLight(0xffffff, 1.1);
+  rim.position.set(-3, 1, -2);
+  scene.add(rim);
+
+  function resize() {
+    var w = host.clientWidth, h = host.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h, false); // false: ukuran CSS diurus kelas Tailwind, bukan JS
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  if (window.ResizeObserver) new ResizeObserver(resize).observe(host);
+  else window.addEventListener('resize', resize);
+  resize();
+
+  var raf = null, prev = 0, onScreen = false, started = false;
+
+  // ── Putar dengan seret ──
+  // Ditulis manual, bukan OrbitControls: yang dibutuhkan cuma rotasi. OrbitControls
+  // sekalian membawa zoom lewat event 'wheel', dan itu yang dulu merebut scroll halaman.
+  // Di sini tidak ada listener 'wheel' sama sekali, jadi scroll tetap milik halaman.
+  var dragging = false, lastX = 0, lastY = 0;
+  var PITCH_MAX = 0.6; // radian, supaya model tidak bisa dijungkirkan sampai terbalik
+
+  renderer.domElement.addEventListener('pointerdown', function (e) {
+    dragging = true;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    renderer.domElement.setPointerCapture(e.pointerId);
+    renderer.domElement.style.cursor = 'grabbing';
+  });
+
+  renderer.domElement.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    pivot.rotation.y += (e.clientX - lastX) * 0.008;
+    tilt.rotation.x = Math.max(-PITCH_MAX, Math.min(PITCH_MAX,
+      tilt.rotation.x + (e.clientY - lastY) * 0.008));
+    lastX = e.clientX;
+    lastY = e.clientY;
+  });
+
+  function endDrag(e) {
+    if (!dragging) return;
+    dragging = false;
+    if (e && e.pointerId !== undefined) {
+      try { renderer.domElement.releasePointerCapture(e.pointerId); } catch (err) {}
+    }
+    renderer.domElement.style.cursor = 'grab';
+  }
+  renderer.domElement.addEventListener('pointerup', endDrag);
+  renderer.domElement.addEventListener('pointercancel', endDrag);
+
+  function frame(t) {
+    raf = requestAnimationFrame(frame);
+    if (!dragging) pivot.rotation.y += (prev ? (t - prev) / 1000 : 0) * 0.35;
+    prev = t;
+    renderer.render(scene, camera);
+  }
+  function play() { if (raf === null) { prev = 0; raf = requestAnimationFrame(frame); } }
+  function pause() { if (raf !== null) { cancelAnimationFrame(raf); raf = null; } }
+
+  function load() {
+    started = true;
+    new GLTFLoader().load('assets/projects/skull.glb', function (gltf) {
+      var model = gltf.scene;
+      var box = new THREE.Box3().setFromObject(model);
+      var span = box.getSize(new THREE.Vector3()).length();
+      model.position.sub(box.getCenter(new THREE.Vector3())); // titik putar di tengah objek
+      pivot.add(model);
+
+      // Pengali jarak kamera = besar model di dalam bingkai; makin besar, makin kecil tampilannya
+      camera.position.set(0, 0, span * 0.88);
+      camera.near = span / 100;
+      camera.far = span * 10;
+      camera.updateProjectionMatrix();
+
+      if (onScreen) play();
+    }, undefined, drop);
+  }
+
+  // File .glb 6 MB baru diunduh saat blok ini mendekati layar, dan animasi berhenti
+  // begitu keluar layar supaya tidak membakar baterai di latar belakang.
+  if (window.IntersectionObserver) {
+    new IntersectionObserver(function (entries) {
+      onScreen = entries[0].isIntersecting;
+      if (!onScreen) { pause(); return; }
+      if (!started) load();
+      play();
+    }, { rootMargin: '200px' }).observe(host);
+  } else {
+    onScreen = true;
+    load();
+  }
 })();
 </script>
 </body>

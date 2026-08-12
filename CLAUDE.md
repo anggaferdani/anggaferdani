@@ -30,7 +30,7 @@ python -m http.server 8000
 Cek cepat sintaks kedua inline script tanpa membuka browser:
 
 ```powershell
-node -e "const h=require('fs').readFileSync('index.html','utf8');[...h.matchAll(/<script>([\s\S]*?)<\/script>/g)].forEach((s,i)=>{try{new Function(s[1]);console.log(i,'OK')}catch(e){console.log(i,'FAIL',e.message)}})"
+node -e "const h=require('fs').readFileSync('index.html','utf8');[...h.matchAll(/<script(\b[^>]*)>([\s\S]*?)<\/script>/g)].forEach((m,i)=>{if(/\bsrc=/.test(m[1]))return;if(/importmap/.test(m[1])){try{JSON.parse(m[2]);console.log(i,'importmap OK')}catch(e){console.log(i,'importmap FAIL',e.message)}return}try{new Function(m[2].replace(/^\s*import[\s\S]*?;\s*$/gm,''));console.log(i,'OK')}catch(e){console.log(i,'FAIL',e.message)}})"
 ```
 
 ## Arsitektur
@@ -59,7 +59,12 @@ Bagian paling berlapis di file ini — logikanya di [index.html:203-322](index.h
 ### Galeri project
 
 - Nama file mengikuti pola `assets/projects/<slug-project><nnnn>.<ext>`, misal `empatpilarmpr0001.jpg`, `holomoc0001.png`. Besar-kecil huruf ekstensi harus persis sama dengan nama di disk (`empatpilarmpr0006.JPG` huruf besar) — hosting Linux membedakannya, Windows tidak, jadi salah ketik case tidak akan ketahuan saat dites lokal.
-- **Gambar ditampilkan utuh, tanpa crop.** `<img class="js-shot w-full">` polos: tidak ada `aspect-*`, tidak ada `object-cover`, tinggi mengikuti rasio asli file. Konsekuensinya rasio gambar sumber langsung menentukan tampilan — screenshot kecil (`smartattendanceGCK0001.jpg`, 314px) akan diperbesar dan pecah kalau dipasang di kolom penuh.
+- **Gambar ditampilkan utuh, tanpa crop.** `<img class="js-shot w-full">` polos: tidak ada `aspect-*`, tidak ada `object-cover`, tinggi mengikuti rasio asli file. Konsekuensinya rasio gambar sumber langsung menentukan tampilan — screenshot yang lebih sempit dari 700px akan diperbesar dan pecah.
+- **Video dan model 3D dibungkus `.shot-frame`,** dan border putih menempel di pembungkus itu, bukan di elemen medianya. Tinggi elemen video dihitung dari rasio sumber dan sering jatuh di pecahan piksel, sehingga border 1px sisi bawah bisa hilang saat dibulatkan browser. `dropShot()` membuang `.shot-frame` sekalian supaya tidak menyisakan bingkai kosong.
+- Video memakai `preload="metadata"` (bukan autoplay) dan model `.glb` memakai `loading="lazy"` — file 4–10 MB itu tidak ikut terunduh saat halaman dibuka.
+- Preview 3D memakai **three.js yang di-vendor lokal** di `assets/vendor/three/` (three.module.min.js + `jsm/loaders/GLTFLoader.js` + `jsm/utils/BufferGeometryUtils.js` — GLTFLoader mengimpor yang terakhir secara relatif, jadi struktur foldernya tidak boleh diratakan). Specifier `three` dan `three/addons/` dipetakan lewat `<script type="importmap">` di `<head>`, yang **harus** berada sebelum module script mana pun.
+- **Preview 3D sengaja tanpa OrbitControls.** Begitu kontrol dipasang, three.js menangkap event `wheel` di atas canvas dan halaman berhenti bisa di-scroll saat kursor melewatinya. Model hanya berputar sendiri; canvas-nya inert.
+- Model `.glb` dimuat lewat `fetch`, jadi **tidak jalan di `file://`** (CORS memblokir fetch dari origin file). Untuk mengetes preview 3D wajib lewat `python -m http.server`. Gambar dan video tetap tampil di `file://` karena tidak memakai `fetch`.
 - Jumlah kolom grid mengikuti jumlah gambar: 1 gambar → `grid-cols-1` (lebar penuh), 2 gambar → `grid-cols-2`, 3 atau lebih → `grid-cols-3`. Tidak ada varian per-breakpoint — angkanya sama di mobile dan desktop. Kalau menambah/menghapus gambar, sesuaikan juga angka kolomnya.
 - **`items-start` wajib ada** di tiap grid — tanpa itu `align-items: stretch` merentang `<img>` setinggi barisnya dan gambar jadi gepeng.
 - Gambar yang gagal dimuat **dihapus dari DOM** ([index.html:349-355](index.html#L349-L355)), jadi galeri hanya berisi file yang benar-benar ada. Konsekuensinya path salah ketik hilang tanpa jejak — tidak ada gambar rusak, tapi juga tidak ada tanda bahwa gambar itu pernah ada.
